@@ -102,5 +102,20 @@ module.exports = {
         } catch (error) {
             return res.status(500).json(error.message);
         }
+    },
+
+    async delete(req, res) {
+        try {
+            const { id = null } = req.params;
+
+            if (id !== null && id !== "null") {
+                await Users.findByIdAndDelete(id);
+                res.status(200).send();
+            } else {
+                res.status(400).send();
+            }
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
     }
 };
